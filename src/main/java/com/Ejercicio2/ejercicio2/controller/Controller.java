@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class Controller {
-    
     @GetMapping ("/platos/{num}")
     @ResponseBody
     public Plato traerPlatos (@PathVariable int num) {
