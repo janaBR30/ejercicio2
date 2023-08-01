@@ -1,13 +1,38 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.Ejercicio2.ejercicio2.controller;
 
-/**
- *
- * @author janab
- */
+import com.Ejercicio2.ejercicio2.Plato;
+import java.util.ArrayList;
+import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
 public class Controller {
     
+    @GetMapping ("/platos/{num}")
+    @ResponseBody
+    public Plato traerPlatos (@PathVariable int num) {
+        
+        List<Plato> listaPlatos = new ArrayList<Plato>();
+        
+        //simulamos la bd lógica agregando elementos a la lista
+        listaPlatos.add(new Plato (1, "Milanesas con Puré",500.00,"Milanesa simple, sin napolitana con puré de papas"));
+        listaPlatos.add(new Plato (2, "Ravioles con Salsa Bolognesa",850.00,"Ravioles de verdura o ricota con salsa bolognesa y queso rallado"));
+        listaPlatos.add(new Plato (3, "Lomo a la mostaza con papas fritas",1200.00,"Bides de lomo con salsa de mostaza y papas fritas"));
+        listaPlatos.add(new Plato (4, "Ensalada mixta",350.00,"Ensalada de lechuga, tomate y cebolla"));
+        listaPlatos.add(new Plato (5, "Milanesas con arroz primavera",500.00,"Milanesa simple, sin napolitana con arroz y verduras"));
+
+             //buscamos en la lista de platos a ver si hay uno con esa id
+            for (Plato plat : listaPlatos) { 
+                if (plat.getNum() == num) {
+                    //Si encontró devuelve el plato completo
+                    return plat; 
+                }    
+            }
+           
+        //si no encontró nada, devuelve null
+        return null;
+    }
 }
